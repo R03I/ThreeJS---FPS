@@ -1,5 +1,5 @@
 const path = require('path');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const src = path.resolve(__dirname, 'src');
 
@@ -13,21 +13,26 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
-      },
+      }
     ]
   },
   resolve: {
-    plugins: [new TsconfigPathsPlugin()],
-    alias: {
-      '@': src,
-    },
     extensions: ['.tsx', '.ts', '.js']
   },
   output: {
     filename: 'index.js',
-    path: src
+    path: path.resolve(__dirname, 'dist')
   },
   devServer: {
     static: src,
   },
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/textures', to: 'textures' },
+        { from: 'src/maps', to: 'models' },
+        { from: 'src/index.html', to: 'index.html' }
+      ]
+    })
+  ]
 }
