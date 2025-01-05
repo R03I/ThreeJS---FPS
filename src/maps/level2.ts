@@ -59,7 +59,7 @@ const level2 = {
     mission_hud: [
         "Find the secret blue gem",
         "Find the secret red gem",
-        "Kill all the soldiers in the secret base"
+        "Kill all soldiers in the secret base"
     ],
     mobs: [
         {
